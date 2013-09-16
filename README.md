@@ -1,9 +1,15 @@
-##When
-Date/Calendar recursion library for PHP 5.3+
+# When [![Build Status](https://travis-ci.org/mynameiszanders/when.png?branch=develop)](https://travis-ci.org/mynameiszanders/when)
 
-[![Build Status](https://travis-ci.org/tplaner/When.png?branch=develop)](https://travis-ci.org/tplaner/When)
+A PHP library, managed by Composer, for RFC-2445 RRule date recursion.
 
-Author: Tom Planer
+**Please note** that this repository was forked from [tplaner/When](https://github.com/tplaner/When); this is not
+originally my project. I plan on altering the specification beyong the recommended standards to accomodate the need for
+a completely specific commercial use-case, and therefore need GitHub issues (which is not provided in forked repos).
+
+Author: [Zander Baldwin](https://github.com/mynameiszanders)<br />
+Original Author: [Tom Planer](https://github.com/tplaner)
+
+##Original README
 
 ###About
 The second version of When.
