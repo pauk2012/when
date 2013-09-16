@@ -10,6 +10,7 @@ class When extends \DateTime
     public $count;
     public $interval;
     public $inclusive = true;
+    public $offset = 0;
 
     public $byseconds;
     public $byminutes;
@@ -100,6 +101,18 @@ class When extends \DateTime
         }
 
         throw new \InvalidArgumentException("inclusive: Accepts boolean values");
+    }
+
+    public function offset($offset)
+    {
+        if(is_int($offset) && $offset >= 0)
+        {
+            $this->offset = (int) $offset;
+
+            return $this;
+        }
+
+        throw new \InvalidArgumentException("offset: Accepts positive integer values");
     }
 
     public function bysecond($seconds, $delimiter = ",")
@@ -403,7 +416,7 @@ class When extends \DateTime
         // Do not add the start date to the list of occurences, even if it matches; it will be found just like all the
         // other dates.
 
-        while ($dateLooper < $this->until && count($this->occurences) < $this->count)
+        while ($dateLooper < $this->until && count($this->occurences) < $this->count + $this->offset)
         {
             if ($this->freq === "yearly")
             {
@@ -629,6 +642,11 @@ class When extends \DateTime
 
             }
         }
+
+        // Because we may have generated extra occurences due to the offset, we should trim the occurences array to
+        // contain the correct amount of datetimes.
+        // Don't forget to alter this if at some point in the future negative offsets are permitted.
+        $this->occurences = array_slice($this->occurences, $this->offset);
     }
 
     protected function addOccurence($occurences)
@@ -661,7 +679,7 @@ class When extends \DateTime
             {
                 foreach ($this->byseconds as $second)
                 {
-                    if (count($this->occurences) < $this->count)
+                    if (count($this->occurences) < $this->count + $this->offset)
                     {
                         $occurence = clone $dateLooper;
                         $occurence->setTime($hour, $minute, $second);
