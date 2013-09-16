@@ -9,6 +9,7 @@ class When extends \DateTime
     public $until;
     public $count;
     public $interval;
+    public $inclusive = true;
 
     public $byseconds;
     public $byminutes;
@@ -87,6 +88,18 @@ class When extends \DateTime
         }
 
         throw new \InvalidArgumentException("interval: Accepts numeric values");
+    }
+
+    public function inclusive($inclusive)
+    {
+        if (is_bool($inclusive))
+        {
+            $this->inclusive = $inclusive;
+
+            return $this;
+        }
+
+        throw new \InvalidArgumentException("inclusive: Accepts boolean values");
     }
 
     public function bysecond($seconds, $delimiter = ",")
@@ -491,12 +504,12 @@ class When extends \DateTime
                         {
                             if ($setpos > 0)
                             {
-                                $this->occurences[] = $occurences[$setpos - 1];
+                                $this->addOccurence($occurences[$setpos - 1]);
                             }
                             // We cannot have a position of zero, so specify here that we only accept negative numbers.
                             elseif($setpos < 0)
                             {
-                                $this->occurences[] = $occurences[$occurenceCount + $setpos];
+                                $this->addOccurence($occurences[$occurenceCount + $setpos]);
                             }
                         }
                     }
@@ -620,11 +633,18 @@ class When extends \DateTime
 
     protected function addOccurence($occurences)
     {
+        if(!is_array($occurences)) {
+            $occurences = array($occurences);
+        }
         foreach ($occurences as $occurence)
         {
-            // make sure that this occurence isn't already in the list
-            if (!in_array($occurence, $this->occurences))
-            {
+            if (
+                $occurence instanceof \DateTime
+                // Make sure that this occurrence isn't already in the list.
+             && !in_array($occurence, $this->occurences)
+                // Make sure that the start date isn't included if the inclusive setting if switched off.
+             && ($this->inclusive || $occurence != $this->startDate)
+            ) {
                 $this->occurences[] = $occurence;
             }
         }
