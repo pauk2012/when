@@ -7,6 +7,6 @@ php:
 
 before_script:
   - composer selfupdate
-  - composer install
+  - composer update
 
 script: phpunit
