@@ -387,11 +387,8 @@ class When extends \DateTime
 
         $dateLooper = clone $this->startDate;
 
-        // add the start date to the list of occurences
-        if ($this->occursOn($dateLooper))
-        {
-            $this->addOccurence($this->generateTimeOccurences($dateLooper));
-        }
+        // Do not add the start date to the list of occurences, even if it matches; it will be found just like all the
+        // other dates.
 
         while ($dateLooper < $this->until && count($this->occurences) < $this->count)
         {
@@ -496,7 +493,8 @@ class When extends \DateTime
                             {
                                 $this->occurences[] = $occurences[$setpos - 1];
                             }
-                            else
+                            // We cannot have a position of zero, so specify here that we only accept negative numbers.
+                            elseif($setpos < 0)
                             {
                                 $this->occurences[] = $occurences[$occurenceCount + $setpos];
                             }
