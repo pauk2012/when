@@ -1,4 +1,4 @@
-# When [![Build Status](https://travis-ci.org/mynameiszanders/when.png?branch=develop)](https://travis-ci.org/mynameiszanders/when)
+# When [![Build Status](https://travis-ci.org/mynameiszanders/when.png?branch=master)](https://travis-ci.org/mynameiszanders/when)
 
 A PHP library, managed by Composer, for RFC-2445 RRule date recursion; version **0.4**.
 
