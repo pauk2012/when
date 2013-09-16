@@ -1,14 +1,20 @@
 {
-    "name": "tplaner/when",
+    "name": "mynameiszanders/when",
     "type": "library",
     "description": "Date/Calendar recursion library.",
-    "keywords": ["recurrence", "date", "time", "DateTime"],
-    "homepage": "https://github.com/tplaner/When",
+    "keywords": ["recurrence", "date", "time", "DateTime", "recursion"],
+    "homepage": "https://github.com/mynameiszanders/when",
     "license": "MIT",
     "authors": [
         {
             "name": "Tom Planer",
             "email": "tplaner@gmail.com"
+        },
+        {
+            "name": "Zander Baldwin",
+            "email": "mynameiszanders@gmail.com",
+            "homepage": "http://mynameis.zande.rs",
+            "role": "Developer"
         }
     ],
     "require": {
