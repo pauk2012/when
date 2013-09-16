@@ -486,7 +486,7 @@ class When extends \DateTime
                 // meet the setpos
                 if (isset($this->bysetpos))
                 {
-                    if ($count > 0)
+                    if (!empty($occurences))
                     {
                         $occurenceCount = count($occurences);
 
