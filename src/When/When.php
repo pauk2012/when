@@ -392,10 +392,6 @@ class When extends \DateTime
         {
             $this->addOccurence($this->generateTimeOccurences($dateLooper));
         }
-        else
-        {
-            throw new InvalidStartDate();
-        }
 
         while ($dateLooper < $this->until && count($this->occurences) < $this->count)
         {
