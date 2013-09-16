@@ -5,6 +5,7 @@
     "keywords": ["recurrence", "date", "time", "DateTime", "recursion"],
     "homepage": "https://github.com/mynameiszanders/when",
     "license": "MIT",
+    "version": "0.4",
     "authors": [
         {
             "name": "Tom Planer",
