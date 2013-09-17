@@ -1,6 +1,6 @@
 # When [![Build Status](https://travis-ci.org/mynameiszanders/when.png?branch=master)](https://travis-ci.org/mynameiszanders/when)
 
-A PHP library, managed by Composer, for RFC-2445 RRule date recursion; version **0.4**.
+A PHP library, managed by Composer, for RFC-2445 RRule date recursion; version **0.4.1**.
 
 **Please note** that this repository was forked from [tplaner/When](https://github.com/tplaner/When); this is not
 originally my project. I plan on altering the specification beyong the recommended standards to accomodate the need for
