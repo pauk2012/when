@@ -2,6 +2,6 @@
 
     namespace When\Exceptions;
 
-    class InvalidArgument extends WhenException
+    class InvalidRule extends InvalidArgument
     {
     }
