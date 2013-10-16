@@ -331,6 +331,7 @@
                 });
                 $arguments = array_unique($arguments, SORT_REGULAR);
                 $this->seconds = $arguments;
+                return $this;
             }
             throw new Exceptions\InsufficientArguments;
         }
@@ -356,6 +357,7 @@
                 });
                 $arguments = array_unique($arguments, SORT_REGULAR);
                 $this->minutes = $arguments;
+                return $this;
             }
             throw new Exceptions\InsufficientArguments;
         }
@@ -381,6 +383,7 @@
                 });
                 $arguments = array_unique($arguments, SORT_REGULAR);
                 $this->hours = $arguments;
+                return $this;
             }
             throw new Exceptions\InsufficientArguments;
         }
@@ -406,6 +409,7 @@
                 });
                 $arguments = array_unique($arguments, SORT_REGULAR);
                 $this->weekDays = $arguments;
+                return $this;
             }
             throw new Exceptions\InsufficientArguments;
         }
@@ -437,6 +441,7 @@
                 });
                 $arguments = array_unique($arguments, SORT_REGULAR);
                 $this->monthDays = $arguments;
+                return $this;
             }
             throw new Exceptions\InsufficientArguments;
         }
@@ -468,6 +473,7 @@
                 });
                 $arguments = array_unique($arguments, SORT_REGULAR);
                 $this->yearDays = $arguments;
+                return $this;
             }
             throw new Exceptions\InsufficientArguments;
         }
@@ -499,6 +505,7 @@
                 });
                 $arguments = array_unique($arguments, SORT_REGULAR);
                 $this->weekNumbers = $arguments;
+                return $this;
             }
             throw new Exceptions\InsufficientArguments;
         }
@@ -524,6 +531,7 @@
                 });
                 $arguments = array_unique($arguments, SORT_REGULAR);
                 $this->months = $arguments;
+                return $this;
             }
             throw new Exceptions\InsufficientArguments;
         }
