@@ -999,7 +999,7 @@
                      && (!isset($this->count) || count($this->occurrences) < $this->count + $this->offset)
                     ) {
                         if($this->occursOn($date) && $this->occursAt($date)) {
-                            $this->addOccurrence($date)
+                            $this->addOccurrence($date);
                         }
                         $date = clone $this->start;
                         $interval = new Interval('PT' . ($this->interval * ++$count) . 'H');
@@ -1012,7 +1012,7 @@
                      && (!isset($this->count) || count($this->occurrences) < $this->count + $this->offset)
                     ) {
                         if($this->occursOn($date) && $this->occursAt($date)) {
-                            $this->addOccurrence($date)
+                            $this->addOccurrence($date);
                         }
                         $date = clone $this->start;
                         $interval = new Interval('PT' . ($this->interval * ++$count) . 'M');
@@ -1025,7 +1025,7 @@
                      && (!isset($this->count) || count($this->occurrences) < $this->count + $this->offset)
                     ) {
                         if($this->occursOn($date) && $this->occursAt($date)) {
-                            $this->addOccurrence($date)
+                            $this->addOccurrence($date);
                         }
                         $date = clone $this->start;
                         $interval = new Interval('PT' . ($this->interval * ++$count) . 'S');
