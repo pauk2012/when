@@ -547,7 +547,7 @@
          */
         public function position($position)
         {
-            if(is_int($inclusive)) {
+            if(is_int($position)) {
                 $this->position = $position;
                 return $this;
             }
