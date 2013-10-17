@@ -317,7 +317,7 @@
          * @throws When\Exceptions\InsufficientArguments
          * @throws When\Exceptions\InvalidArgument
          * @access public
-         * @param integer[] ...
+         * @params integer
          * @return $this
          */
         public function second()
@@ -343,7 +343,7 @@
          * @throws When\Exceptions\InsufficientArguments
          * @throws When\Exceptions\InvalidArgument
          * @access public
-         * @param integer[] ...
+         * @params integer
          * @return $this
          */
         public function minute()
@@ -369,7 +369,7 @@
          * @throws When\Exceptions\InsufficientArguments
          * @throws When\Exceptions\InvalidArgument
          * @access public
-         * @param integer $interval
+         * @params integer
          * @return $this
          */
         public function hour()
@@ -395,7 +395,7 @@
          * @throws When\Exceptions\InsufficientArguments
          * @throws When\Exceptions\InvalidArgument
          * @access public
-         * @param integer $interval
+         * @params integer
          * @return $this
          */
         public function weekDay($weekDay)
@@ -421,7 +421,7 @@
          * @throws When\Exceptions\InsufficientArguments
          * @throws When\Exceptions\InvalidArgument
          * @access public
-         * @param integer[] ...
+         * @params integer
          * @return $this
          */
         public function monthDay()
@@ -453,7 +453,7 @@
          * @throws When\Exceptions\InsufficientArguments
          * @throws When\Exceptions\InvalidArgument
          * @access public
-         * @param integer[] ...
+         * @params integer
          * @return $this
          */
         public function yearDay()
@@ -485,7 +485,7 @@
          * @throws When\Exceptions\InsufficientArguments
          * @throws When\Exceptions\InvalidArgument
          * @access public
-         * @param integer $interval
+         * @params integer
          * @return $this
          */
         public function weekNumber()
@@ -517,7 +517,7 @@
          * @throws When\Exceptions\InsufficientArguments
          * @throws When\Exceptions\InvalidArgument
          * @access public
-         * @param (integer|string)[] ...
+         * @params integer|string
          * @return $this
          */
         public function month()
@@ -542,7 +542,7 @@
          *
          * @throws When\Exceptions\InvalidArgument
          * @access public
-         * @param integer $position
+         * @params integer
          * @return $this
          */
         public function position($position)
