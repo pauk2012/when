@@ -604,61 +604,61 @@
             switch($month) {
                 case 'jan':
                 case 'january':
-                case self::JANUARY:
+                case (string) self::JANUARY:
                     $month = self::JANUARY;
                     break;
                 case 'feb':
                 case 'februaru':
-                case self::FEBRUARY:
+                case (string) self::FEBRUARY:
                     $month = self::FEBRUARY;
                     break;
                 case 'mar':
                 case 'march':
-                case self::MARCH:
+                case (string) self::MARCH:
                     $month = self::MARCH;
                     break;
                 case 'apr':
                 case 'april':
-                case self::APRIL:
+                case (string) self::APRIL:
                     $month = self::APRIL;
                     break;
                 case 'may':
-                case self::MAY:
+                case (string) self::MAY:
                     $month = self::MAY;
                     break;
                 case 'jun':
                 case 'june':
-                case self::JUNE:
+                case (string) self::JUNE:
                     $month = self::JUNE;
                     break;
                 case 'jul':
                 case 'july':
-                case self::JULY:
+                case (string) self::JULY:
                     $month = self::JULY;
                     break;
                 case 'aug':
                 case 'august':
-                case self::AUGUST:
+                case (string) self::AUGUST:
                     $month = self::AUGUST;
                     break;
                 case 'sep':
                 case 'september':
-                case self::SEPTEMBER:
+                case (string) self::SEPTEMBER:
                     $month = self::SEPTEMBER;
                     break;
                 case 'oct':
                 case 'october':
-                case self::OCTOBER:
+                case (string) self::OCTOBER:
                     $month = self::OCTOBER;
                     break;
                 case 'nov':
                 case 'november':
-                case self::NOVEMBER:
+                case (string) self::NOVEMBER:
                     $month = self::NOVEMBER;
                     break;
                 case 'dec':
                 case 'december':
-                case self::DECEMBER:
+                case (string) self::DECEMBER:
                     $month = self::DECEMBER;
                     break;
 
@@ -691,23 +691,27 @@
                 case 'su':
                 case 'sun':
                 case 'sunday':
+                case (string) self::SUNDAY:
                     $weekDay = self::SUNDAY;
                     break;
                 case 'mo':
                 case 'mon':
                 case 'monday':
+                case (string) self::MONDAY:
                     $weekDay = self::MONDAY;
                     break;
                 case 'tu':
                 case 'tue':
                 case 'tues':
                 case 'tuesday':
+                case (string) self::TUESDAY:
                     $weekDay = self::TUESDAY;
                     break;
                 case 'we':
                 case 'wed':
                 case 'weds':
                 case 'wednesday':
+                case (string) self::WEDNESDAY:
                     $weekDay = self::WEDNESDAY;
                     break;
                 case 'th':
@@ -715,16 +719,19 @@
                 case 'thur':
                 case 'thurs':
                 case 'thursday':
+                case (string) self::THURSDAY:
                     $weekDay = self::THURSDAY;
                     break;
                 case 'fr':
                 case 'fri':
                 case 'friday':
+                case (string) self::FRIDAY:
                     $weekDay = self::FRIDAY;
                     break;
                 case 'sa':
                 case 'sat':
                 case 'saturday':
+                case (string) self::SATURDAY:
                     $weekDay = self::SATURDAY;
                     break;
                 default:
