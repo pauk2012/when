@@ -674,6 +674,11 @@
          */
         protected function validateWeekDay($weekDay)
         {
+            // If the week day has already been specified correctly, then return it straight away.
+            if(is_int($weekDay) && $weekDay >= 0 && $weekDay <= 6) {
+                return $weekDay;
+            }
+            // if the week day is a string, then we should make it all lowercase for consistency.
             if(is_string($weekDay)) {
                 $weekDay = strtolower($weekDay);
             }
@@ -681,27 +686,23 @@
                 case 'su':
                 case 'sun':
                 case 'sunday':
-                case self::SUNDAY:
                     $weekDay = self::SUNDAY;
                     break;
                 case 'mo':
                 case 'mon':
                 case 'monday':
-                case self::MONDAY:
                     $weekDay = self::MONDAY;
                     break;
                 case 'tu':
                 case 'tue':
                 case 'tues':
                 case 'tuesday':
-                case self::TUESDAY:
                     $weekDay = self::TUESDAY;
                     break;
                 case 'we':
                 case 'wed':
                 case 'weds':
                 case 'wednesday':
-                case self::WEDNESDAY:
                     $weekDay = self::WEDNESDAY;
                     break;
                 case 'th':
@@ -709,18 +710,16 @@
                 case 'thur':
                 case 'thurs':
                 case 'thursday':
-                case self::THURSDAY:
                     $weekDay = self::THURSDAY;
                     break;
                 case 'fr':
                 case 'fri':
-                case self::FRIDAY:
+                case 'friday':
                     $weekDay = self::FRIDAY;
                     break;
                 case 'sa':
                 case 'sat':
                 case 'saturday':
-                case self::SATURDAY:
                     $weekDay = self::SATURDAY;
                     break;
                 default:
