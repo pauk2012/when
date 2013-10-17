@@ -545,10 +545,17 @@
          * @params integer
          * @return $this
          */
-        public function position($position)
+        public function position()
         {
-            if(is_int($position)) {
-                $this->position = $position;
+            if(func_num_args() > 0) {
+                $arguments = func_get_args();
+                array_walk($arguments, function(&$argument) {
+                    if(!is_int($argument)) {
+                        throw new Exceptions\InvalidArgument;
+                    }
+                });
+                $arguments = array_unique($arguments, SORT_REGULAR);
+                $this->position = $arguments;
                 return $this;
             }
             throw new Exceptions\InvalidArgument;
