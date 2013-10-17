@@ -770,37 +770,67 @@
 
 
         /**
-         * RRULE
+         * Recursion Rule
          *
          * @throws When\Exceptions\InvalidArgument
          * @access public
-         * @param string $rrule
-         * @return string|boolean
+         * @return string
          */
-        public function rrule($rrule = null)
+        public function rrule()
         {
-            if(func_num_args() > 0) {
-                if(is_string($rrule)) {
-                    return $this->setRule($rrule);
-                }
-                throw new Exceptions\InvalidArgument;
-            }
-            else {
-                $this->generateRule();
-                return $this->rrule;
-            }
-        }
-
-
-        /**
-         * Generate RRULE String
-         *
-         * @access protected
-         * @return void
-         */
-        protected function generateRule()
-        {
+            // Initial checks, just as if we were generating the dates.
             $this->checkCriteria();
+            // Define the variable that will hold the rule (initialise to an empty string).
+            $rule = '';
+            $frequencies = array('', 'YEARLY', 'MONTHLY', 'WEEKLY', 'DAILY', 'HOURLY', 'MINUTELY', 'SECONDLY');
+            $rule .= 'FREQ=' . $frequencies[$this->frequency] . ';';
+            if(isset($this->until)) {
+                $rule = 'UNTIL=' . $this->until->format('U') . ';';
+            }
+            if(isset($this->count)) {
+                $rule .= 'COUNT=' . $this->count . ';';
+            }
+            if($this->interval != 1) {
+                $rule .= 'INTERVAL=' . $this->interval . ';';
+            }
+            if($this->inclusive != 1) {
+                $rule .= 'INCLUSIVE=' . ($this->inclusive ? 'REQUIRED' : 'IGNORED') . ';';
+            }
+            if($this->offset != 0) {
+                $rule .= 'OFFSET=' . $this->offset . ';';
+            }
+            if(isset($this->seconds)) {
+                $rule .= 'BYSECOND=' . implode(',', $this->seconds) . ';';
+            }
+            if(isset($this->minutes)) {
+                $rule .= 'BYMINUTE=' . implode(',', $this->minutes) . ';';
+            }
+            if(isset($this->hours)) {
+                $rule .= 'BYHOUR=' . implode(',', $this->hours) . ';';
+            }
+            if(isset($this->weekDays)) {
+                $rule .= 'BYWEEKDAY=' . implode(',', $this->weekDays) . ';';
+            }
+            if(isset($this->monthDays)) {
+                $rule .= 'BYMONTHDAY=' . implode(',', $this->monthDays) . ';';
+            }
+            if(isset($this->yearDays)) {
+                $rule .= 'BYYEARDAY=' . implode(',', $this->yearDays) . ';';
+            }
+            if(isset($this->weekNumbers)) {
+                $rule .= 'BYWEEKNO=' . implode(',', $this->weekNumbers) . ';';
+            }
+            if(isset($this->months)) {
+                $rule .= 'BYMONTH=' . implode(',', $this->months) . ';';
+            }
+            if(isset($this->position)) {
+                $rule .= 'BYSETPOS=' . implode(',', $this->position) . ';';
+            }
+            if($this->weekStart != 1) {
+                $rule .= 'WKST=' . implode(',', $this->weekStart) . ';';
+            }
+
+            return $rule;
         }
 
 
