@@ -831,7 +831,7 @@
             if($this->weekStart != 1) {
                 $rule .= 'WKST=' . implode(',', $this->weekStart) . ';';
             }
-
+            $this->rule = $rule;
             return $rule;
         }
 
