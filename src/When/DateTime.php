@@ -1076,7 +1076,7 @@
             try {
                 $date = is_object($date) && $date instanceof CoreDateTime
                     ? $date
-                    : parent::__construct($date, $timezone);
+                    : new self($date, $timezone);
             }
             catch(\Exception $e) {
                 throw new Exception\InvalidArgument;
