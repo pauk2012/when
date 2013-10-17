@@ -1088,14 +1088,14 @@
             $monthDay           = (int)  $date->format('j');
             $leapYear           = (bool) $date->format('L');
             $yearDay            = (int)  $date->format('z') + 1;
-            $fromEndOfMonth     = (int)  $date->format('t') + 1 - $day;
+            $fromEndOfMonth     = (int)  $date->format('t') + 1 - $monthDay;
             $fromEndOfYear = $leapYear
                 ? $yearDay - 367
                 : $yearDay - 366;
             $weekNumber         = (int)  $date->format('W');
             $weeksFromEnd       = (int)  ceil(abs($fromEndOfMonth) / 7) * (-1);
             $weekDay            = (int)  $date->format('w');
-            $occurrence         = (int)  ceil($day / 7);
+            $occurrence         = (int)  ceil($monthDay / 7);
             $occurrenceNegative = (int)  ceil(abs($fromEndOfMonth) / 7) * (-1);
 
             // Check Date Boundaries.
@@ -1253,7 +1253,7 @@
         {
             // If a singular DateTime has been passed, we want to convert it to an array so that we don't experience
             // unexpected behaviour from the following foreach loop.
-            if(!is_array($datetime)) {
+            if(!is_array($datetimes)) {
                 $datetimes = array($datetimes);
             }
             foreach($datetimes as $datetime) {
@@ -1289,7 +1289,7 @@
          * Generate Time Occurrences
          *
          * @access protected
-         * @param CoreDateTime $datetime
+         * @param CoreDateTime $looper
          * @return CoreDateTime[]
          */
         protected function generateTimeOccurrences(CoreDateTime $looper)
@@ -1301,7 +1301,7 @@
             foreach($hours as $hour) {
                 foreach($minutes as $minute) {
                     foreach($seconds as $second) {
-                        $occurrence = clone $datetime;
+                        $occurrence = clone $looper;
                         $occurrence->setTime($hour, $minute, $second);
                         $occurrences[] = $occurrence;
                     }
