@@ -1067,7 +1067,7 @@
 
             if($this->offset > 0) {
                 // Because we may have generated extra occurences due to the offset, we should trim the occurences array to
-                // contain the correct amount of datetimes. Don't forget to alter this if at some point in the future if
+                // contain the correct amount of datetimes. Don't forget to alter this if at some point in the future
                 // negative offsets are permitted.
                 $this->occurrences = array_slice($this->occurrences, $this->offset);
             }
