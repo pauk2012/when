@@ -247,12 +247,14 @@
          * @param string|CoreDateTime $until
          * @return $this
          */
-        public function until($until, $timezone = null)
+        public function until($until)
         {
             try {
                 $until = is_object($until) && $until instanceof CoreDateTime
-                    ? $until
-                    : parent::__instance($until, $timezone);
+                    // Even though $until is an instance of CoreDateTime, we shall make a new instance to make sure it
+                    // isn't an instance of $this.
+                    ? new CoreDateTime($until->format(self::RFC3339))
+                    : new CoreDateTime($until);
                 if($until >= $this) {
                     $this->until = $until;
                     return $this;
