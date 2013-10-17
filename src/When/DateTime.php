@@ -128,9 +128,9 @@
         protected $occurrences  = array();
 
         /**
-         * @var string $rrule
+         * @var string $rule
          */
-        protected $rrule;
+        protected $rule;
 
         /**
          * @var CoreDateTime[] $results
@@ -180,7 +180,7 @@
             catch(\Exception $e) {
                 throw new Exceptions\InvalidArgument;
             }
-            // If a rrule has been specified to initialise the object properties with, attempt that now.
+            // If a rule has been specified to initialise the object properties with, attempt that now.
             if(!is_null($rule)) {
                 $this->setRule($rule);
             }
@@ -840,10 +840,10 @@
          * Set RRULE String
          *
          * @access protected
-         * @param string $rrule
+         * @param string $rule
          * @return void
          */
-        protected function setRule($rrule)
+        protected function setRule($rule)
         {
             if(!is_string($rule)) {
                 throw new Exceptions\InvalidArgument;
@@ -866,7 +866,7 @@
             // Generate RRULE string.
             $this->rrule();
             // Specify list of object properties to be serialised.
-            return array('rrule');
+            return array('rule');
         }
 
 
@@ -880,7 +880,7 @@
         {
             // After the RRULE string has been populated from the unserialisation, generated the rest of the object
             // properties from it.
-            $this->setRule($this->rrule);
+            $this->setRule($this->rule);
         }
 
 
