@@ -1071,6 +1071,28 @@
                 // negative offsets are permitted.
                 $this->occurrences = array_slice($this->occurrences, $this->offset);
             }
+            // Now that we have generated all of our occurences, we need to format them in the way the user wanted, and
+            // then return them.
+            return $this->prepare($format);
+        }
+
+        /**
+         * Prepare Dates
+         *
+         * @access protected
+         * @param string $format
+         * @return array
+         */
+        protected function prepare($format = null)
+        {
+            $occurrences = array();
+            foreach($this->occurrences as $occurrence) {
+                $occurrence = is_string($format)
+                    ? $occurrence->format($format)
+                    : new CoreDateTime($occurrence->format($occurrence::RFC3339));
+                $occurrences[] = $occurrence;
+            }
+            return $occurrences;
         }
 
         /**
