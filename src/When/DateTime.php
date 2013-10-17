@@ -137,6 +137,29 @@
          */
         public $results;
 
+        /**
+         * @static
+         * @var array $mapping
+         */
+        protected static $mapping = array(
+            'frequency'     => 'FREQ',          // ENUM
+            'until'         => 'UNTIL',         // Integer (singular)
+            'count'         => 'COUNT',         // Integer (singular)
+            'interval'      => 'INTERVAL',      // Integer (singular)
+            'inclusive'     => 'INCLUSIVE',     // ENUM
+            'offset'        => 'OFFSET',        // Integer (singular)
+            'seconds'       => 'BYSECOND',      // Integer (multiple)
+            'minutes'       => 'BYMINUTE',      // Integer (multiple)
+            'hours'         => 'BYHOUR',        // Integer (multiple)
+            'weekDays'      => 'BYWEEKDAY',     // Integer (multiple)
+            'monthDays'     => 'BYMONTHDAY',    // Integer (multiple)
+            'yearDays'      => 'BYYEARDAY',     // Integer (multiple)
+            'weekNumbers'   => 'BYWEEKNO',      // Integer (multiple)
+            'months'        => 'BYMONTH',       // Integer (multiple)
+            'position'      => 'BYSETPOS',      // Integer (multiple)
+            'weekStart'     => 'WKST',          // Integer (singular)
+        );
+
 
         /**
          * Constructor Method
