@@ -593,6 +593,11 @@
          */
         protected function validateMonth($month)
         {
+            // If the month has already been specified correctly, then return it straight away.
+            if(is_int($month) && $month >= 1 && $month <= 12) {
+                return $month;
+            }
+            // if the month is a string, then we should make it all lowercase for consistency.
             if(is_string($month)) {
                 $month = strtolower($month);
             }
