@@ -931,7 +931,7 @@
                         $day = (int) $date->format('j');
                         $daysInMonth = (int) $date->format('t');
                         // Iterate over the remaining days in the month.
-                        for(; $day < $daysInMonth; $day++) {
+                        for(; $day <= $daysInMonth; $day++) {
                             // If the current day of the month is an occurrence according to the criteria set, then
                             // save it to the list.
                             if($this->occursOn($date)) {
