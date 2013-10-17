@@ -1,11 +1,13 @@
 {
+
     "name": "mynameiszanders/when",
     "type": "library",
     "description": "Date/Calendar recursion library.",
-    "keywords": ["recurrence", "date", "time", "DateTime", "recursion"],
+    "keywords": ["recurrence", "date", "time", "DateTime", "recursion", "calendar"],
     "homepage": "https://github.com/mynameiszanders/when",
     "license": "MIT",
     "version": "0.4.1",
+
     "authors": [
         {
             "name": "Tom Planer",
@@ -18,13 +20,19 @@
             "role": "Developer"
         }
     ],
+
+    "require-dev": {
+        "sami/sami": "1.2"
+    },
+
     "require": {
         "php": ">=5.3.0"
     },
+
     "autoload": {
         "psr-0": {
             "When": "src/"
         }
-    },
-    "minimum-stability": "dev"
+    }
+
 }
