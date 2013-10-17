@@ -778,7 +778,7 @@
          * @access public
          * @return string
          */
-        public function rrule()
+        public function rule()
         {
             // Initial checks, just as if we were generating the dates.
             $this->checkCriteria();
@@ -864,7 +864,7 @@
         public function __sleep()
         {
             // Generate RRULE string.
-            $this->rrule();
+            $this->rule();
             // Specify list of object properties to be serialised.
             return array('rule');
         }
@@ -892,7 +892,7 @@
          */
         public function __toString()
         {
-            return $this->rrule();
+            return $this->rule();
         }
 
 
