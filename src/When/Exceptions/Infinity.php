@@ -2,6 +2,6 @@
 
     namespace When\Exceptions;
 
-    class Infinity extends WhenException
+    class Infinity extends InvalidCombination
     {
     }
