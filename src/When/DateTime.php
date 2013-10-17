@@ -170,15 +170,19 @@
          * @param string $timezone
          * @return void
          */
-        public function __construct($datetime = null, $timezone = null)
+        public function __construct($datetime = null, $rule = null)
         {
             try {
                 is_object($datetime) && $datetime instanceof CoreDateTime
                     ? parent::__construct($datetime->format(self::RFC3339))
-                    : parent::__construct($datetime, $timezone);
+                    : parent::__construct($datetime);
             }
             catch(\Exception $e) {
                 throw new Exceptions\InvalidArgument;
+            }
+            // If a rrule has been specified to initialise the object properties with, attempt that now.
+            if(!is_null($rule)) {
+                $this->setRule($rule);
             }
         }
 
@@ -807,7 +811,13 @@
          * @param string $rrule
          * @return void
          */
-        protected function setRule($rrule) {}
+        protected function setRule($rrule)
+        {
+            if(!is_string($rule)) {
+                throw new Exceptions\InvalidArgument;
+            }
+            $rules = preg_split('/;/', $rule, -1, PREG_SPLIT_NO_EMPTY);
+        }
 
 
         /**
@@ -822,7 +832,7 @@
         public function __sleep()
         {
             // Generate RRULE string.
-            $this->generateRule();
+            $this->rrule();
             // Specify list of object properties to be serialised.
             return array('rrule');
         }
@@ -850,8 +860,7 @@
          */
         public function __toString()
         {
-            $this->generateRule();
-            return $this->rrule;
+            return $this->rrule();
         }
 
 
