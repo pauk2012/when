@@ -2,6 +2,6 @@
 
     namespace When\Exceptions;
 
-    class FrequencyRequired extends WhenException
+    class FrequencyRequired extends InvalidCombination
     {
     }
