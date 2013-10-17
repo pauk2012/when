@@ -308,7 +308,7 @@
         public function offset($offset)
         {
             if(is_int($offset) && $offset >= 0) {
-                $this->offset = 0;
+                $this->offset = $offset;
                 return $this;
             }
             throw new Exceptions\InvalidArgument;
