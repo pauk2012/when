@@ -43,11 +43,6 @@
         const REQUIRED          = 2;
 
         /**
-         * @var CoreDateTime $startDate
-         */
-        protected $start;
-
-        /**
          * @var integer $frequency
          */
         protected $frequency;
@@ -155,8 +150,8 @@
         public function __construct($datetime = null, $timezone = null)
         {
             try {
-                $this->start = is_object($datetime) && $datetime instanceof CoreDateTime
-                    ? $datetime
+                is_object($datetime) && $datetime instanceof CoreDateTime
+                    ? parent::__construct($datetime->format(self::RFC3339))
                     : parent::__construct($datetime, $timezone);
             }
             catch(\Exception $e) {
@@ -231,7 +226,7 @@
                 $until = is_object($until) && $until instanceof CoreDateTime
                     ? $until
                     : parent::__instance($until, $timezone);
-                if($until >= $this->start) {
+                if($until >= $this) {
                     $this->until = $until;
                     return $this;
                 }
@@ -842,7 +837,7 @@
             $count = 0;
             // Clone the start DateTime object, as we want to work on a copy of it, rather than editing the original
             // object itself.
-            $date = clone $this->start;
+            $date = clone $this;
             // NOTE: Do not add the start date to the list of occurences automatically even if it matches, it will be
             // found just like all the other dates.
             // However, if the inclusivity type is required, then we need to check now if the start date is valid.
@@ -919,7 +914,7 @@
                         }
                         // Clone the start date again, we shouldn't simply add one yearly interval onto the date looper
                         // as it could have incremented too far with other intervals added to it (months or days).
-                        $date = clone $this->start;
+                        $date = clone $this;
                         // Move onto the next yearly interval.
                         $interval = new Interval('P' . ($this->interval * ++$count) . 'Y');
                         $date->add($interval);
@@ -972,7 +967,7 @@
                         }
                         // Clone the start date again, we shouldn't simply add one yearly interval onto the date looper
                         // as it could have incremented too far with other intervals added to it (months or days).
-                        $date = clone $this->start;
+                        $date = clone $this;
                         // Reset the day of the month, just in case (like if the current day was 31 but the next month
                         // only had 30 days).
                         $date->setDate($date->format('Y'), $date->format('n'), 1);
@@ -985,7 +980,7 @@
                 // much identical (except this one is stupidly complicated).
                 case self::WEEKLY:
                     $dayString = array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
-                    $weekStart = clone $this->start;
+                    $weekStart = clone $this;
                     $weekStart->modify('last ' . $dayString[$this->weekStart]);
                     $weekStart->modify('+7 days');
                     $daysLeft = $weekStart->format('j') - $date->format('j');
@@ -1002,7 +997,7 @@
                             $date->add($interval);
                         }
                         $daysLeft = 7;
-                        $date = clone $this->start;
+                        $date = clone $this;
                         $date->setDate($weekStart->format('Y'), $weekStart->format('n'), $weekStart->format('j'));
                         $interval = new Interval('P' . ($this->interval * (++$count * 7)) . 'D');
                         $date->add($interval);
@@ -1016,7 +1011,7 @@
                         if($this->occursOn($date)) {
                             $this->addOccurrence($this->generateTimeOccurrences($date));
                         }
-                        $date = clone $this->start;
+                        $date = clone $this;
                         $interval = new Interval('P' . ($this->interval * ++$count) . 'D');
                         $date->add($interval);
                     }
@@ -1029,7 +1024,7 @@
                         if($this->occursOn($date) && $this->occursAt($date)) {
                             $this->addOccurrence($date);
                         }
-                        $date = clone $this->start;
+                        $date = clone $this;
                         $interval = new Interval('PT' . ($this->interval * ++$count) . 'H');
                         $date->add($interval);
                     }
@@ -1042,7 +1037,7 @@
                         if($this->occursOn($date) && $this->occursAt($date)) {
                             $this->addOccurrence($date);
                         }
-                        $date = clone $this->start;
+                        $date = clone $this;
                         $interval = new Interval('PT' . ($this->interval * ++$count) . 'M');
                         $date->add($interval);
                     }
@@ -1055,7 +1050,7 @@
                         if($this->occursOn($date) && $this->occursAt($date)) {
                             $this->addOccurrence($date);
                         }
-                        $date = clone $this->start;
+                        $date = clone $this;
                         $interval = new Interval('PT' . ($this->interval * ++$count) . 'S');
                         $date->add($interval);
                     }
@@ -1089,7 +1084,7 @@
             foreach($this->occurrences as $occurrence) {
                 $occurrence = is_string($format)
                     ? $occurrence->format($format)
-                    : new CoreDateTime($occurrence->format($occurrence::RFC3339));
+                    : new CoreDateTime($occurrence->format(self::RFC3339));
                 $occurrences[] = $occurrence;
             }
             return $occurrences;
@@ -1136,7 +1131,7 @@
             // Check Date Boundaries.
             // If the date is less than the start date, then it can't be a future reccurrence. On the other hand, we
             // also don't want it if the date is greater than the "until" limit.
-            if($date < $this->start || (isset($this->until) && $date > $this->until)) {
+            if($date < $this || (isset($this->until) && $date > $this->until)) {
                 return false;
             }
             // If specific months have been set in the criteria, make sure that the date is one of those months.
@@ -1216,7 +1211,7 @@
             // Check Date Boundaries.
             // If the date is less than the start date, then it can't be a future reccurrence. On the other hand, we
             // also don't want it if the date is greater than the "until" limit.
-            if($date < $this->start || (isset($this->until) && $date > $this->until)) {
+            if($date < $this || (isset($this->until) && $date > $this->until)) {
                 return false;
             }
             // If specific hours of the day have been set in the criteria, make sure that the date is one of those
@@ -1307,11 +1302,11 @@
                 if(
                     !in_array($datetime, $this->occurrences)
                  // FOLLOWING TWO LINES IS A HACK UNTIL generateTimeOccurrences() is improved.
-                 && $datetime >= $this->start
+                 && $datetime >= $this
                  && (!isset($this->until) || $datetime <= $this->until)
                  && (
                         (bool) $this->inclusive
-                     || !($datetime == $this->start || $datetime == $this->until)
+                     || !($datetime == $this || $datetime == $this->until)
                     )
                 ) {
                     $this->occurrences[] = $datetime;
@@ -1330,9 +1325,9 @@
         protected function generateTimeOccurrences(CoreDateTime $looper)
         {
             $occurrences = array();
-            $hours   = isset($this->hours)   ? $this->hours   : array($this->start->format('G'));
-            $minutes = isset($this->minutes) ? $this->minutes : array($this->start->format('i'));
-            $seconds = isset($this->seconds) ? $this->seconds : array($this->start->format('s'));
+            $hours   = isset($this->hours)   ? $this->hours   : array($this->format('G'));
+            $minutes = isset($this->minutes) ? $this->minutes : array($this->format('i'));
+            $seconds = isset($this->seconds) ? $this->seconds : array($this->format('s'));
             foreach($hours as $hour) {
                 foreach($minutes as $minute) {
                     foreach($seconds as $second) {
