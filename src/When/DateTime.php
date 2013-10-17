@@ -37,6 +37,10 @@
         const THURSDAY          = 4;
         const FRIDAY            = 5;
         const SATURDAY          = 6;
+        // Inclusivity Types
+        const IGNORED           = 0;
+        const INCLUDED          = 1;
+        const REQUIRED          = 2;
 
         /**
          * @var CoreDateTime $startDate
@@ -66,7 +70,7 @@
         /**
          * @var boolean $inclusive
          */
-        protected $inclusive    = true;
+        protected $inclusive    = 1;
 
         /**
          * @var integer $offset
@@ -286,6 +290,11 @@
         public function inclusive($inclusive)
         {
             if(is_bool($inclusive)) {
+                $inclusive = $inclusive
+                    ? self::INCLUDED
+                    : self::IGNORED;
+            }
+            if(in_array($inclusive, array(self::IGNORED, self::INCLUDED, self::REQUIRED), true)) {
                 $this->inclusive = $inclusive;
                 return $this;
             }
@@ -836,6 +845,10 @@
             $date = clone $this->start;
             // NOTE: Do not add the start date to the list of occurences automatically even if it matches, it will be
             // found just like all the other dates.
+            // However, if the inclusivity type is required, then we need to check now if the start date is valid.
+            if($this->inclusive == self::REQUIRED && !$this->occursOn($date)) {
+                throw new Exceptions\InvalidStartDate;
+            }
             // Each frequency requires slightly different processing, so switch to the correct one.
             // NOTE: When referencing the "current" date, it means the date that the current iteration is pointing to,
             // not the actual current date.
@@ -1275,7 +1288,7 @@
                  && $datetime >= $this->start
                  && (!isset($this->until) || $datetime <= $this->until)
                  && (
-                        $this->inclusive
+                        (bool) $this->inclusive
                      || !($datetime == $this->start || $datetime == $this->until)
                     )
                 ) {
