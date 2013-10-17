@@ -830,7 +830,7 @@
             // be met.
             $this->checkCriteria();
             // Define and normalise a counter for the iteration loop.
-            $intervalCounter = 0;
+            $count = 0;
             // Clone the start DateTime object, as we want to work on a copy of it, rather than editing the original
             // object itself.
             $date = clone $this->start;
