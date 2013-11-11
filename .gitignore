@@ -1,6 +1,4 @@
-/vendor
-/report
-/www
-composer.phar
+vendor/
+tests/report/
 composer.lock
 .DS_Store
