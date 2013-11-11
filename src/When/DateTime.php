@@ -865,11 +865,11 @@
         /**
          * Set RRULE String
          *
-         * @access protected
+         * @access public
          * @param string $rule
          * @return void
          */
-        protected function setRule($rule)
+        public function setRule($rule)
         {
             if(!is_string($rule)) {
                 throw new Exceptions\InvalidArgument;
