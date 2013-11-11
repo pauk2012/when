@@ -277,8 +277,8 @@
          */
         public function count($count)
         {
-            if(is_int($count) && $count >= 0) {
-                $this->count = $count;
+            if(preg_match('/^[1-9]\\d*$/', $count)) {
+                $this->count = (int) $count;
                 return $this;
             }
             throw new Exceptions\InvalidArgument;
@@ -295,8 +295,8 @@
          */
         public function interval($interval)
         {
-            if(is_int($interval) && $interval > 0) {
-                $this->interval = $interval;
+            if(preg_match('/^[1-9]\\d*$/', $interval)) {
+                $this->interval = (int) $interval;
                 return $this;
             }
             throw new Exceptions\InvalidArgument;
@@ -308,7 +308,7 @@
          *
          * @throws When\Exceptions\InvalidArgument
          * @access public
-         * @param boolean $inclusive
+         * @param boolean|integer $inclusive
          * @return $this
          */
         public function inclusive($inclusive)
@@ -336,8 +336,8 @@
          */
         public function offset($offset)
         {
-            if(is_int($offset) && $offset >= 0) {
-                $this->offset = $offset;
+            if(preg_match('/^[1-9]\\d*$/', $offset)) {
+                $this->offset = (int) $offset;
                 return $this;
             }
             throw new Exceptions\InvalidArgument;
@@ -357,10 +357,11 @@
         {
             if(func_num_args() > 0) {
                 $arguments = func_get_args();
-                array_walk($arguments, function($argument) {
-                    if(!is_int($argument) || $argument < 0 || $argument > 59) {
+                array_walk($arguments, function(&$argument) {
+                    if(!preg_match('/^(0|[1-9]\\d*)$/', $argument) || $argument > 59) {
                         throw new Exceptions\InvalidArgument;
                     }
+                    $argument = (int) $argument;
                 });
                 $arguments = array_unique($arguments, SORT_REGULAR);
                 $this->seconds = $arguments;
@@ -383,10 +384,11 @@
         {
             if(func_num_args() > 0) {
                 $arguments = func_get_args();
-                array_walk($arguments, function($argument) {
-                    if(!is_int($argument) || $argument < 0 || $argument > 59) {
+                array_walk($arguments, function(&$argument) {
+                    if(!preg_match('/^(0|[1-9]\\d*)$/', $argument) || $argument > 59) {
                         throw new Exceptions\InvalidArgument;
                     }
+                    $argument = (int) $argument;
                 });
                 $arguments = array_unique($arguments, SORT_REGULAR);
                 $this->minutes = $arguments;
@@ -409,10 +411,11 @@
         {
             if(func_num_args() > 0) {
                 $arguments = func_get_args();
-                array_walk($arguments, function($argument) {
-                    if(!is_int($argument) || $argument < 0 || $argument > 23) {
+                array_walk($arguments, function(&$argument) {
+                    if(!preg_match('/^(0|[1-9]\\d*)$/', $argument) || $argument > 23) {
                         throw new Exceptions\InvalidArgument;
                     }
+                    $argument = (int) $argument;
                 });
                 $arguments = array_unique($arguments, SORT_REGULAR);
                 $this->hours = $arguments;
@@ -461,9 +464,9 @@
         {
             if(func_num_args() > 0) {
                 $arguments = func_get_args();
-                array_walk($arguments, function($argument) {
+                array_walk($arguments, function(&$argument) {
                     if(
-                        !is_int($argument)
+                        !preg_match('/^-?[1-9]\\d*$/', $argument)
                      || (
                             ($argument <  1 || $argument >  31)
                          && ($argument > -1 || $argument < -31)
@@ -471,6 +474,7 @@
                     ) {
                         throw new Exceptions\InvalidArgument;
                     }
+                    $argument = (int) $argument;
                 });
                 $arguments = array_unique($arguments, SORT_REGULAR);
                 $this->monthDays = $arguments;
@@ -493,9 +497,9 @@
         {
             if(func_num_args() > 0) {
                 $arguments = func_get_args();
-                array_walk($arguments, function($argument) {
+                array_walk($arguments, function(&$argument) {
                     if(
-                        !is_int($argument)
+                        !preg_match('/^-?[1-9]\\d*$/', $argument)
                      || (
                             ($argument <  1 || $argument >  366)
                          && ($argument > -1 || $argument < -366)
@@ -503,6 +507,7 @@
                     ) {
                         throw new Exceptions\InvalidArgument;
                     }
+                    $argument = (int) $argument;
                 });
                 $arguments = array_unique($arguments, SORT_REGULAR);
                 $this->yearDays = $arguments;
@@ -525,9 +530,9 @@
         {
             if(func_num_args() > 0) {
                 $arguments = func_get_args();
-                array_walk($arguments, function($argument) {
+                array_walk($arguments, function(&$argument) {
                     if(
-                        !is_int($argument)
+                        !preg_match('/^-?[1-9]\\d*$/', $argument)
                      || (
                             ($argument <  1 || $argument >  53)
                          && ($argument > -1 || $argument < -53)
@@ -535,6 +540,7 @@
                     ) {
                         throw new Exceptions\InvalidArgument;
                     }
+                    $argument = (int) $argument;
                 });
                 $arguments = array_unique($arguments, SORT_REGULAR);
                 $this->weekNumbers = $arguments;
@@ -583,9 +589,10 @@
             if(func_num_args() > 0) {
                 $arguments = func_get_args();
                 array_walk($arguments, function(&$argument) {
-                    if(!is_int($argument)) {
+                    if(!preg_match('/^-?[1-9]\\d*$/', $argument)) {
                         throw new Exceptions\InvalidArgument;
                     }
+                    $argument = (int) $argument;
                 });
                 $arguments = array_unique($arguments, SORT_REGULAR);
                 $this->position = $arguments;
