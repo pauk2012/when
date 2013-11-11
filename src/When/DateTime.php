@@ -318,11 +318,30 @@
                     ? self::INCLUDED
                     : self::IGNORED;
             }
-            if(in_array($inclusive, array(self::IGNORED, self::INCLUDED, self::REQUIRED), true)) {
-                $this->inclusive = $inclusive;
-                return $this;
+            elseif(is_string($inclusive)) {
+                $inclusive = strtoupper($inclusive);
             }
-            throw new Exceptions\InvalidArgument;
+            elseif(preg_match('/^[1-9]\\d*$/', $inclusive)) {
+                $inclusive = (int) $inclusive;
+            }
+            switch($inclusive) {
+                case 'IGNORED':
+                case self::IGNORED:
+                    $this->inclusive = self::IGNORED;
+                    break;
+                case 'INCLUDED':
+                case self::INCLUDED:
+                    $this->inclusive = self::INCLUDED;
+                    break;
+                case 'REQUIRED':
+                case self::REQUIRED:
+                    $this->inclusive = self::REQUIRED;
+                    break;
+                default:
+                    throw new Exceptions\InvalidArgument;
+                    break;
+            }
+            return $this;
         }
 
 
