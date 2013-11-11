@@ -874,7 +874,78 @@
             if(!is_string($rule)) {
                 throw new Exceptions\InvalidArgument;
             }
-            $rules = preg_split('/;/', $rule, -1, PREG_SPLIT_NO_EMPTY);
+            $ruleParts = preg_split('/\\s*;\\s*/', $rule, -1, PREG_SPLIT_NO_EMPTY);
+            try {
+                foreach($ruleParts as $ruleSegment) {
+                    if(!preg_match('/^([a-zA-Z]+)\s*\=\s*(([a-zA-Z]+|-?\\d+)(,\s*([a-zA-Z]+|-?\\d+))*)$/', $ruleSegment, $matches)) {
+                        throw new Exceptions\InvalidRule;
+                    }
+                    list(, $name, $value) = $matches;
+                    switch(strtoupper($name)) {
+                        case 'FREQ':
+                            $this->frequency($value);
+                            break;
+                        case 'UNTIL':
+                            $this->until('@' . $value);
+                            break;
+                        case 'COUNT':
+                            $this->count($value);
+                            break;
+                        case 'INTERVAL':
+                            $this->interval($value);
+                            break;
+                        case 'INCLUSIVE':
+                            $this->inclusive($value);
+                            break;
+                        case 'OFFSET':
+                            $this->offset($value);
+                            break;
+                        case 'BYSECOND':
+                            $value = preg_split('/\\s*,\\s*/', $value, -1, PREG_SPLIT_NO_EMPTY);
+                            call_user_func_array(array($this, 'second'), $value);
+                            break;
+                        case 'BYMINUTE':
+                            $value = preg_split('/\\s*,\\s*/', $value, -1, PREG_SPLIT_NO_EMPTY);
+                            call_user_func_array(array($this, 'minute'), $value);
+                            break;
+                        case 'BYHOUR':
+                            $value = preg_split('/\\s*,\\s*/', $value, -1, PREG_SPLIT_NO_EMPTY);
+                            call_user_func_array(array($this, 'hour'), $value);
+                            break;
+                        case 'BYWEEKDAY':
+                            $value = preg_split('/\\s*,\\s*/', $value, -1, PREG_SPLIT_NO_EMPTY);
+                            call_user_func_array(array($this, 'weekDay'), $value);
+                            break;
+                        case 'BYMONTHDAY':
+                            $value = preg_split('/\\s*,\\s*/', $value, -1, PREG_SPLIT_NO_EMPTY);
+                            call_user_func_array(array($this, 'monthDay'), $value);
+                            break;
+                        case 'BYYEARDAY':
+                            $value = preg_split('/\\s*,\\s*/', $value, -1, PREG_SPLIT_NO_EMPTY);
+                            call_user_func_array(array($this, 'yearDay'), $value);
+                            break;
+                        case 'BYWEEKNO':
+                            $value = preg_split('/\\s*,\\s*/', $value, -1, PREG_SPLIT_NO_EMPTY);
+                            call_user_func_array(array($this, 'weekNumber'), $value);
+                            break;
+                        case 'BYMONTH':
+                            $value = preg_split('/\\s*,\\s*/', $value, -1, PREG_SPLIT_NO_EMPTY);
+                            call_user_func_array(array($this, 'month'), $value);
+                            break;
+                        case 'BYSETPOS':
+                            $value = preg_split('/\\s*,\\s*/', $value, -1, PREG_SPLIT_NO_EMPTY);
+                            call_user_func_array(array($this, 'position'), $value);
+                            break;
+                        default:
+                            throw new Exceptions\InvalidRule;
+                            break;
+                    }
+                }
+                $this->checkCriteria();
+            }
+            catch(\Exception $e) {
+                throw new Exceptions\InvalidRule;
+            }
         }
 
 
