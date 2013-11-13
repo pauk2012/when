@@ -1253,10 +1253,21 @@
         protected function prepare($format = null)
         {
             $occurrences = array();
+            // Iterate over each occurrence to determine how to return it.
             foreach($this->occurrences as $occurrence) {
-                $occurrence = is_string($format)
-                    ? $occurrence->format($format)
-                    : new CoreDateTime($occurrence->format(self::RFC3339));
+                // Has a format string been specified?
+                if(is_string($format)) {
+                    // Do a check to see if an integer has been generated. If one has then return an integer data-type,
+                    // otherwise return the string that is generated.
+                    $occurrence = preg_match('/^(0|-?[1-9]\\d*)$/', $occurrence = $occurrence->format($format))
+                        ? (int) $occurrence
+                        : $occurrence;
+                }
+                // If a format string has not been passed, then return them as Date objects.
+                else {
+                    $occurrence = new CoreDateTime($occurrence->format(self::RFC3339));
+                }
+                // Add the formatted occurrence to the array to return.
                 $occurrences[] = $occurrence;
             }
             return $occurrences;
