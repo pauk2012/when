@@ -1,6 +1,6 @@
 # When [![Build Status](https://travis-ci.org/mynameiszanders/when.png?branch=master)](https://travis-ci.org/mynameiszanders/when)
 
-A PHP library, managed by Composer, for RFC-2445 RRule date recursion; version **1.0.1**.
+A PHP library, managed by Composer, for RFC-2445 RRule date recursion; version **1.0.2**.
 
 Author: [Zander Baldwin](https://github.com/mynameiszanders)<br />
 Original Author: [Tom Planer](https://github.com/tplaner)
