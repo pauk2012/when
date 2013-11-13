@@ -941,7 +941,6 @@
                             break;
                     }
                 }
-                $this->checkCriteria();
             }
             catch(\Exception $e) {
                 throw new Exceptions\InvalidRule;
