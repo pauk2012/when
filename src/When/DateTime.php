@@ -1029,6 +1029,7 @@
                     ) {
                         // If specific months of the year have been set in the criteria, iterate over each of them.
                         if(isset($this->months)) {
+                            $specificDay = $date->format('j');
                             foreach($this->months as $month) {
                                 // If specific days of the month have been set in the criteria, iterate over each of
                                 // them.
@@ -1053,7 +1054,7 @@
                                 else {
                                     // Set the date to the same year and same day of the month as the start date (only
                                     // set month).
-                                    $date->setDate($date->format('Y'), $month, $date->format('j'));
+                                    $date->setDate($date->format('Y'), $month, $specificDay);
                                     // If the current day in the month is an occurrence according to the criteria
                                     // set, then save it to the list.
                                     if($this->occursOn($date)) {
