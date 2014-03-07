@@ -1055,6 +1055,16 @@
                                     // Set the date to the same year and same day of the month as the start date (only
                                     // set month).
                                     $date->setDate($date->format('Y'), $month, $specificDay);
+                                    // If the day number set is not the day specified it means that month does not have
+                                    // that many days, set the day number as the maximum for that month.
+                                    if($date->format('j') != $specificDay) {
+                                        $tmpDate = new CoreDateTime(implode('-', array(
+                                            $date->format('Y'),
+                                            $month,
+                                            1
+                                        )));
+                                        $date->setDate($date->format('Y'), $month, $tmpDate->format('t'));
+                                    }
                                     // If the current day in the month is an occurrence according to the criteria
                                     // set, then save it to the list.
                                     if($this->occursOn($date)) {
