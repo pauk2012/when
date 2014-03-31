@@ -29,12 +29,6 @@
          * @return $this
          */
         public function setFrequency($frequency);
-        /**
-         * Get: Recurance Frequency
-         *
-         * @access public
-         * @return integer
-         */
         public function getFrequency();
 
 
@@ -47,12 +41,6 @@
          * @return $this
          */
         public function setUntil($until);
-        /**
-         * Recur Until
-         *
-         * @access public
-         * @return CoreDateTime
-         */
         public function getUntil();
 
 
@@ -65,12 +53,6 @@
          * @return $this
          */
         public function setCount($count);
-        /**
-         * Number of Recurrences
-         *
-         * @access public
-         * @return integer
-         */
         public function getCount();
 
 
@@ -246,15 +228,6 @@
          * @return string
          */
         public function setRule($rule);
-
-
-        /**
-         * Set RRULE String
-         *
-         * @access public
-         * @param string $rule
-         * @return void
-         */
         public function getRule();
 
 
@@ -268,23 +241,14 @@
         public function generate($format = null);
 
         /**
-         * Occurs On
+         * Occurs?
          *
-         * @throws When\Exceptions\InvalidArgument
+         * Does the date provided fit the date recursion rule?
+         *
          * @access public
-         * @param string|CoreDateTime $date
+         * @param CoreDateTime $date
          * @return boolean
          */
-        public function occursOn($date, $timezone = null);
-
-        /**
-         * Occurs At
-         *
-         * @throws When\Exceptions\InvalidArgument
-         * @access public
-         * @param string|CoreDateTime $time
-         * @return boolean
-         */
-        public function occursAt(CoreDateTime $time);
+        public function occurs(CoreDateTime $date);
 
     }
