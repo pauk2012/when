@@ -18,26 +18,34 @@ Currently this version does everything version 1 was capable of, it also support
 
 I will be replacing version 1 with this as soon as I complete the documentation. Until then here are some simple examples:
 
+```php
+<?php
+    use \When\DateTime as When;
+
     // friday the 13th for the next 5 occurences
-    $r = new When();
-    $r->startDate(new DateTime("19980213T090000"))
-      ->freq("monthly")
+    $r = new When('19980213T090000');
+    $occurences = $r->freq(When::MONTHLY)
       ->count(5)
-      ->byday("fr")
+      ->byday(When::FRIDAY)
       ->bymonthday(13)
-      ->generateOccurences();
+      ->generate();
 
-    print_r($r->occurences);
+    print_r($occurences);
+```
 
 
+```php
+<?php
+    use \When\DateTime as When;
 
     // friday the 13th for the next 5 occurences rrule
     $r = new When();
-    $r->startDate(new DateTime("19980213T090000"))
-      ->rrule("FREQ=MONTHLY;BYDAY=FR;BYMONTHDAY=13")
-      ->generateOccurences();
+    $occurences = $r->startDate(new DateTime('19980213T090000'))
+      ->rule("FREQ=MONTHLY;BYDAY=FR;BYMONTHDAY=13")
+      ->generate();
 
-    print_r($r->occurences);
+    print_r($occurences);
+```
 
 ###License
 When is licensed under the MIT License, see `LICENSE` for specific details.
