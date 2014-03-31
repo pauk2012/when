@@ -16,14 +16,9 @@
         {
             "name": "Zander Baldwin",
             "email": "mynameiszanders@gmail.com",
-            "homepage": "http://mynameis.zande.rs",
-            "role": "Developer"
+            "homepage": "http://mynameis.zande.rs"
         }
     ],
-
-    "require-dev": {
-        "sami/sami": "1.2"
-    },
 
     "require": {
         "php": ">=5.3.0"
