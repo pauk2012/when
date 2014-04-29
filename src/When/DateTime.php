@@ -195,8 +195,11 @@
          * @param string|integer $frequency
          * @return $this
          */
-        public function frequency($frequency)
+        public function frequency($frequency = null)
         {
+            if(func_num_args() === 0) {
+                return $this->frequency;
+            }
             // Convert the frequency to lowercase if it is a string for easier matching.
             if(is_string($frequency)) {
                 $frequency = strtolower(trim($frequency));
@@ -247,8 +250,11 @@
          * @param string|CoreDateTime $until
          * @return $this
          */
-        public function until($until)
+        public function until($until = null)
         {
+            if(func_num_args() == 0) {
+                return clone $this->until;
+            }
             try {
                 $until = is_object($until) && $until instanceof CoreDateTime
                     // Even though $until is an instance of CoreDateTime, we shall make a new instance to make sure it
@@ -275,8 +281,11 @@
          * @param integer $count
          * @return $this
          */
-        public function count($count)
+        public function count($count = null)
         {
+            if(func_num_args() === 0) {
+                return $this->count;
+            }
             if(preg_match('/^[1-9]\\d*$/', $count)) {
                 $this->count = (int) $count;
                 return $this;
@@ -293,8 +302,11 @@
          * @param integer $interval
          * @return $this
          */
-        public function interval($interval)
+        public function interval($interval = null)
         {
+            if(func_num_args() === 0) {
+                return $this->interval;
+            }
             if(preg_match('/^[1-9]\\d*$/', $interval)) {
                 $this->interval = (int) $interval;
                 return $this;
@@ -386,7 +398,7 @@
                 $this->seconds = $arguments;
                 return $this;
             }
-            throw new Exceptions\InsufficientArguments;
+            return $this->seconds;
         }
 
 
@@ -413,7 +425,7 @@
                 $this->minutes = $arguments;
                 return $this;
             }
-            throw new Exceptions\InsufficientArguments;
+            return $this->minutes;
         }
 
 
@@ -440,7 +452,7 @@
                 $this->hours = $arguments;
                 return $this;
             }
-            throw new Exceptions\InsufficientArguments;
+            return $this->hours;
         }
 
 
@@ -453,7 +465,7 @@
          * @params integer
          * @return $this
          */
-        public function weekDay($weekDay)
+        public function weekDay($weekDay = null)
         {
             if(func_num_args() > 0) {
                 $arguments = func_get_args();
@@ -466,7 +478,7 @@
                 $this->weekDays = $arguments;
                 return $this;
             }
-            throw new Exceptions\InsufficientArguments;
+            return $this->weekDays;
         }
 
 
@@ -499,7 +511,7 @@
                 $this->monthDays = $arguments;
                 return $this;
             }
-            throw new Exceptions\InsufficientArguments;
+            return $this->monthDays;
         }
 
 
@@ -532,7 +544,7 @@
                 $this->yearDays = $arguments;
                 return $this;
             }
-            throw new Exceptions\InsufficientArguments;
+            return $this->yearDays;
         }
 
 
@@ -565,7 +577,7 @@
                 $this->weekNumbers = $arguments;
                 return $this;
             }
-            throw new Exceptions\InsufficientArguments;
+            return $this->weekNumbers;
         }
 
 
@@ -591,7 +603,7 @@
                 $this->months = $arguments;
                 return $this;
             }
-            throw new Exceptions\InsufficientArguments;
+            return $this->months;
         }
 
 
@@ -617,7 +629,7 @@
                 $this->position = $arguments;
                 return $this;
             }
-            throw new Exceptions\InvalidArgument;
+            return $this->position;
         }
 
 
@@ -629,8 +641,11 @@
          * @param string|integer $weekDay
          * @return $this
          */
-        public function weekStart($weekDay)
+        public function weekStart($weekDay = null)
         {
+            if(func_num_args() === 0) {
+                return $this->weekStart;
+            }
             if(is_int($weekDay = $this->validateWeekDay($weekDay))) {
                 $this->weekStart = $weekDay;
                 return $this;
@@ -804,8 +819,11 @@
          * @access public
          * @return string
          */
-        public function rule()
+        public function rule($rule = null)
         {
+            if(func_num_args() > 0) {
+                return $this->setRule($rule);
+            }
             // Initial checks, just as if we were generating the dates.
             $this->checkCriteria();
             // Define the variable that will hold the rule (initialise to an empty string).
@@ -945,6 +963,7 @@
             catch(\Exception $e) {
                 throw new Exceptions\InvalidRule;
             }
+            return $this;
         }
 
 
@@ -1194,7 +1213,7 @@
                             $this->addOccurrence($this->generateTimeOccurrences($date));
                         }
                         $date = clone $this;
-                        $interval = new Interval('P' . ($this->interval * ++$count) . 'D');
+                        $interval = new Interval('PT' . ($this->interval * ++$count * (24*60*60)) . 'S');
                         $date->add($interval);
                     }
                     break;
