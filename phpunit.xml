@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit backupGlobals="false"
          backupStaticAttributes="false"
-         bootstrap="vendor/autoload.php"
+         bootstrap="tests/bootstrap.php"
          colors="false"
          convertErrorsToExceptions="true"
          convertNoticesToExceptions="true"
@@ -26,7 +26,6 @@
 
     <logging>
         <log type="coverage-html" target="./tests/report" charset="UTF-8" yui="true" highlight="false" lowUpperBound="35" highLowerBound="70" />
-        <log type="testdox-html" target="./tests/report/testdox.html" />
     </logging>
 
 </phpunit>
