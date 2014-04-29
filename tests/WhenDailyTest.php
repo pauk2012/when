@@ -1,6 +1,6 @@
 <?php
 
-use \When\When;
+use \When\DateTime as When;
 
 class WhenDailyTest extends PHPUnit_Framework_TestCase
 {
@@ -11,26 +11,23 @@ class WhenDailyTest extends PHPUnit_Framework_TestCase
      */
     function testDailyOne()
     {
-        $results[] = new DateTime('1997-09-02 09:00:00');
-        $results[] = new DateTime('1997-09-03 09:00:00');
-        $results[] = new DateTime('1997-09-04 09:00:00');
-        $results[] = new DateTime('1997-09-05 09:00:00');
-        $results[] = new DateTime('1997-09-06 09:00:00');
-        $results[] = new DateTime('1997-09-07 09:00:00');
-        $results[] = new DateTime('1997-09-08 09:00:00');
-        $results[] = new DateTime('1997-09-09 09:00:00');
-        $results[] = new DateTime('1997-09-10 09:00:00');
-        $results[] = new DateTime('1997-09-11 09:00:00');
+        $results[] = (new DateTime('1997-09-02 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-03 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-04 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-05 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-06 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-07 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-08 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-09 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-10 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-11 09:00:00'))->format('U');
 
-        $r = new When();
-        $r->startDate(new DateTime("19970902T090000"))
-          ->freq("daily")
+        $r = new When(new DateTime("19970902T090000"));
+        $occurences = $r->frequency(When::DAILY)
           ->count(10)
-          ->generateOccurences();
+          ->generate('U');
 
-        $occurences = $r->occurences;
-
-        foreach ($results as $key => $result)
+        foreach($results as $key => $result)
         {
             $this->assertEquals($result, $occurences[$key]);
         }
@@ -43,131 +40,133 @@ class WhenDailyTest extends PHPUnit_Framework_TestCase
      */
     function testDailyTwo()
     {
-        $results[] = new DateTime('1997-09-02 09:00:00');
-        $results[] = new DateTime('1997-09-03 09:00:00');
-        $results[] = new DateTime('1997-09-04 09:00:00');
-        $results[] = new DateTime('1997-09-05 09:00:00');
-        $results[] = new DateTime('1997-09-06 09:00:00');
-        $results[] = new DateTime('1997-09-07 09:00:00');
-        $results[] = new DateTime('1997-09-08 09:00:00');
-        $results[] = new DateTime('1997-09-09 09:00:00');
-        $results[] = new DateTime('1997-09-10 09:00:00');
-        $results[] = new DateTime('1997-09-11 09:00:00');
-        $results[] = new DateTime('1997-09-12 09:00:00');
-        $results[] = new DateTime('1997-09-13 09:00:00');
-        $results[] = new DateTime('1997-09-14 09:00:00');
-        $results[] = new DateTime('1997-09-15 09:00:00');
-        $results[] = new DateTime('1997-09-16 09:00:00');
-        $results[] = new DateTime('1997-09-17 09:00:00');
-        $results[] = new DateTime('1997-09-18 09:00:00');
-        $results[] = new DateTime('1997-09-19 09:00:00');
-        $results[] = new DateTime('1997-09-20 09:00:00');
-        $results[] = new DateTime('1997-09-21 09:00:00');
-        $results[] = new DateTime('1997-09-22 09:00:00');
-        $results[] = new DateTime('1997-09-23 09:00:00');
-        $results[] = new DateTime('1997-09-24 09:00:00');
-        $results[] = new DateTime('1997-09-25 09:00:00');
-        $results[] = new DateTime('1997-09-26 09:00:00');
-        $results[] = new DateTime('1997-09-27 09:00:00');
-        $results[] = new DateTime('1997-09-28 09:00:00');
-        $results[] = new DateTime('1997-09-29 09:00:00');
-        $results[] = new DateTime('1997-09-30 09:00:00');
-        $results[] = new DateTime('1997-10-01 09:00:00');
-        $results[] = new DateTime('1997-10-02 09:00:00');
-        $results[] = new DateTime('1997-10-03 09:00:00');
-        $results[] = new DateTime('1997-10-04 09:00:00');
-        $results[] = new DateTime('1997-10-05 09:00:00');
-        $results[] = new DateTime('1997-10-06 09:00:00');
-        $results[] = new DateTime('1997-10-07 09:00:00');
-        $results[] = new DateTime('1997-10-08 09:00:00');
-        $results[] = new DateTime('1997-10-09 09:00:00');
-        $results[] = new DateTime('1997-10-10 09:00:00');
-        $results[] = new DateTime('1997-10-11 09:00:00');
-        $results[] = new DateTime('1997-10-12 09:00:00');
-        $results[] = new DateTime('1997-10-13 09:00:00');
-        $results[] = new DateTime('1997-10-14 09:00:00');
-        $results[] = new DateTime('1997-10-15 09:00:00');
-        $results[] = new DateTime('1997-10-16 09:00:00');
-        $results[] = new DateTime('1997-10-17 09:00:00');
-        $results[] = new DateTime('1997-10-18 09:00:00');
-        $results[] = new DateTime('1997-10-19 09:00:00');
-        $results[] = new DateTime('1997-10-20 09:00:00');
-        $results[] = new DateTime('1997-10-21 09:00:00');
-        $results[] = new DateTime('1997-10-22 09:00:00');
-        $results[] = new DateTime('1997-10-23 09:00:00');
-        $results[] = new DateTime('1997-10-24 09:00:00');
-        $results[] = new DateTime('1997-10-25 09:00:00');
-        $results[] = new DateTime('1997-10-26 09:00:00');
-        $results[] = new DateTime('1997-10-27 09:00:00');
-        $results[] = new DateTime('1997-10-28 09:00:00');
-        $results[] = new DateTime('1997-10-29 09:00:00');
-        $results[] = new DateTime('1997-10-30 09:00:00');
-        $results[] = new DateTime('1997-10-31 09:00:00');
-        $results[] = new DateTime('1997-11-01 09:00:00');
-        $results[] = new DateTime('1997-11-02 09:00:00');
-        $results[] = new DateTime('1997-11-03 09:00:00');
-        $results[] = new DateTime('1997-11-04 09:00:00');
-        $results[] = new DateTime('1997-11-05 09:00:00');
-        $results[] = new DateTime('1997-11-06 09:00:00');
-        $results[] = new DateTime('1997-11-07 09:00:00');
-        $results[] = new DateTime('1997-11-08 09:00:00');
-        $results[] = new DateTime('1997-11-09 09:00:00');
-        $results[] = new DateTime('1997-11-10 09:00:00');
-        $results[] = new DateTime('1997-11-11 09:00:00');
-        $results[] = new DateTime('1997-11-12 09:00:00');
-        $results[] = new DateTime('1997-11-13 09:00:00');
-        $results[] = new DateTime('1997-11-14 09:00:00');
-        $results[] = new DateTime('1997-11-15 09:00:00');
-        $results[] = new DateTime('1997-11-16 09:00:00');
-        $results[] = new DateTime('1997-11-17 09:00:00');
-        $results[] = new DateTime('1997-11-18 09:00:00');
-        $results[] = new DateTime('1997-11-19 09:00:00');
-        $results[] = new DateTime('1997-11-20 09:00:00');
-        $results[] = new DateTime('1997-11-21 09:00:00');
-        $results[] = new DateTime('1997-11-22 09:00:00');
-        $results[] = new DateTime('1997-11-23 09:00:00');
-        $results[] = new DateTime('1997-11-24 09:00:00');
-        $results[] = new DateTime('1997-11-25 09:00:00');
-        $results[] = new DateTime('1997-11-26 09:00:00');
-        $results[] = new DateTime('1997-11-27 09:00:00');
-        $results[] = new DateTime('1997-11-28 09:00:00');
-        $results[] = new DateTime('1997-11-29 09:00:00');
-        $results[] = new DateTime('1997-11-30 09:00:00');
-        $results[] = new DateTime('1997-12-01 09:00:00');
-        $results[] = new DateTime('1997-12-02 09:00:00');
-        $results[] = new DateTime('1997-12-03 09:00:00');
-        $results[] = new DateTime('1997-12-04 09:00:00');
-        $results[] = new DateTime('1997-12-05 09:00:00');
-        $results[] = new DateTime('1997-12-06 09:00:00');
-        $results[] = new DateTime('1997-12-07 09:00:00');
-        $results[] = new DateTime('1997-12-08 09:00:00');
-        $results[] = new DateTime('1997-12-09 09:00:00');
-        $results[] = new DateTime('1997-12-10 09:00:00');
-        $results[] = new DateTime('1997-12-11 09:00:00');
-        $results[] = new DateTime('1997-12-12 09:00:00');
-        $results[] = new DateTime('1997-12-13 09:00:00');
-        $results[] = new DateTime('1997-12-14 09:00:00');
-        $results[] = new DateTime('1997-12-15 09:00:00');
-        $results[] = new DateTime('1997-12-16 09:00:00');
-        $results[] = new DateTime('1997-12-17 09:00:00');
-        $results[] = new DateTime('1997-12-18 09:00:00');
-        $results[] = new DateTime('1997-12-19 09:00:00');
-        $results[] = new DateTime('1997-12-20 09:00:00');
-        $results[] = new DateTime('1997-12-21 09:00:00');
-        $results[] = new DateTime('1997-12-22 09:00:00');
-        $results[] = new DateTime('1997-12-23 09:00:00');
+        $results[] = (new DateTime('1997-09-02 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-03 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-04 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-05 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-06 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-07 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-08 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-09 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-10 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-11 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-12 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-13 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-14 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-15 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-16 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-17 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-18 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-19 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-20 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-21 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-22 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-23 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-24 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-25 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-26 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-27 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-28 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-29 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-30 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-01 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-02 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-03 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-04 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-05 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-06 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-07 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-08 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-09 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-10 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-11 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-12 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-13 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-14 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-15 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-16 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-17 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-18 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-19 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-20 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-21 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-22 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-23 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-24 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-25 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-26 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-27 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-28 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-29 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-30 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-31 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-01 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-02 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-03 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-04 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-05 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-06 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-07 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-08 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-09 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-10 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-11 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-12 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-13 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-14 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-15 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-16 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-17 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-18 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-19 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-20 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-21 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-22 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-23 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-24 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-25 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-26 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-27 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-28 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-29 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-30 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-01 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-02 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-03 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-04 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-05 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-06 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-07 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-08 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-09 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-10 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-11 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-12 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-13 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-14 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-15 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-16 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-17 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-18 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-19 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-20 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-21 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-22 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-23 09:00:00'))->format('U');
 
-        $r = new When();
-        $r->startDate(new DateTime("19970902T090000"))
-          ->freq("daily")
+        $r = new When(new DateTime("19970902T090000"));
+        $occurences = $r->frequency(When::DAILY)
           ->until(new DateTime("19971224T000000"))
-          ->generateOccurences();
-
-        $occurences = $r->occurences;
+          ->generate('U');
 
         foreach ($results as $key => $result)
         {
-            $this->assertEquals($result, $occurences[$key]);
+            $this->assertEquals(
+                $result, 
+                $occurences[$key],
+                'Could not match key ' . $key . ' with date ' . date('Y-m-d H:i:s', $result) . ".\n"
+              . 'Result was actually ' . date('Y-m-d H:i:s', $occurences[$key]) . ".\n"
+            );
         }
     }
 
@@ -178,66 +177,68 @@ class WhenDailyTest extends PHPUnit_Framework_TestCase
      */
     function testDailyThree()
     {
-        $results[] = new DateTime('1997-09-02 09:00:00');
-        $results[] = new DateTime('1997-09-04 09:00:00');
-        $results[] = new DateTime('1997-09-06 09:00:00');
-        $results[] = new DateTime('1997-09-08 09:00:00');
-        $results[] = new DateTime('1997-09-10 09:00:00');
-        $results[] = new DateTime('1997-09-12 09:00:00');
-        $results[] = new DateTime('1997-09-14 09:00:00');
-        $results[] = new DateTime('1997-09-16 09:00:00');
-        $results[] = new DateTime('1997-09-18 09:00:00');
-        $results[] = new DateTime('1997-09-20 09:00:00');
-        $results[] = new DateTime('1997-09-22 09:00:00');
-        $results[] = new DateTime('1997-09-24 09:00:00');
-        $results[] = new DateTime('1997-09-26 09:00:00');
-        $results[] = new DateTime('1997-09-28 09:00:00');
-        $results[] = new DateTime('1997-09-30 09:00:00');
-        $results[] = new DateTime('1997-10-02 09:00:00');
-        $results[] = new DateTime('1997-10-04 09:00:00');
-        $results[] = new DateTime('1997-10-06 09:00:00');
-        $results[] = new DateTime('1997-10-08 09:00:00');
-        $results[] = new DateTime('1997-10-10 09:00:00');
-        $results[] = new DateTime('1997-10-12 09:00:00');
-        $results[] = new DateTime('1997-10-14 09:00:00');
-        $results[] = new DateTime('1997-10-16 09:00:00');
-        $results[] = new DateTime('1997-10-18 09:00:00');
-        $results[] = new DateTime('1997-10-20 09:00:00');
-        $results[] = new DateTime('1997-10-22 09:00:00');
-        $results[] = new DateTime('1997-10-24 09:00:00');
-        $results[] = new DateTime('1997-10-26 09:00:00');
-        $results[] = new DateTime('1997-10-28 09:00:00');
-        $results[] = new DateTime('1997-10-30 09:00:00');
-        $results[] = new DateTime('1997-11-01 09:00:00');
-        $results[] = new DateTime('1997-11-03 09:00:00');
-        $results[] = new DateTime('1997-11-05 09:00:00');
-        $results[] = new DateTime('1997-11-07 09:00:00');
-        $results[] = new DateTime('1997-11-09 09:00:00');
-        $results[] = new DateTime('1997-11-11 09:00:00');
-        $results[] = new DateTime('1997-11-13 09:00:00');
-        $results[] = new DateTime('1997-11-15 09:00:00');
-        $results[] = new DateTime('1997-11-17 09:00:00');
-        $results[] = new DateTime('1997-11-19 09:00:00');
-        $results[] = new DateTime('1997-11-21 09:00:00');
-        $results[] = new DateTime('1997-11-23 09:00:00');
-        $results[] = new DateTime('1997-11-25 09:00:00');
-        $results[] = new DateTime('1997-11-27 09:00:00');
-        $results[] = new DateTime('1997-11-29 09:00:00');
-        $results[] = new DateTime('1997-12-01 09:00:00');
-        $results[] = new DateTime('1997-12-03 09:00:00');
+        $results[] = (new DateTime('1997-09-02 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-04 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-06 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-08 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-10 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-12 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-14 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-16 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-18 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-20 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-22 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-24 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-26 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-28 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-30 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-02 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-04 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-06 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-08 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-10 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-12 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-14 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-16 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-18 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-20 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-22 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-24 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-26 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-28 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-30 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-01 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-03 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-05 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-07 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-09 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-11 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-13 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-15 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-17 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-19 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-21 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-23 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-25 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-27 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-11-29 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-01 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-12-03 09:00:00'))->format('U');
 
-        $r = new When();
-        $r->startDate(new DateTime("19970902T090000"))
-          ->freq("daily")
+        $r = new When(new DateTime("19970902T090000"));
+        $occurences = $r->frequency(When::DAILY)
           ->interval(2)
           ->count(47)
-          ->generateOccurences();
-
-        $occurences = $r->occurences;
+          ->generate('U');
 
         foreach ($results as $key => $result)
         {
-            $this->assertEquals($result, $occurences[$key]);
+            $this->assertEquals(
+                $result,
+                $occurences[$key],
+                'Could not match key ' . $key . ' with date ' . date('Y-m-d H:i:s', $result) . ".\n"
+              . 'Result was actually ' . date('Y-m-d H:i:s', $occurences[$key]) . ".\n"
+            );
         }
     }
 
@@ -248,20 +249,17 @@ class WhenDailyTest extends PHPUnit_Framework_TestCase
      */
     function testDailyFour()
     {
-        $results[] = new DateTime('1997-09-02 09:00:00');
-        $results[] = new DateTime('1997-09-12 09:00:00');
-        $results[] = new DateTime('1997-09-22 09:00:00');
-        $results[] = new DateTime('1997-10-02 09:00:00');
-        $results[] = new DateTime('1997-10-12 09:00:00');
+        $results[] = (new DateTime('1997-09-02 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-12 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-09-22 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-02 09:00:00'))->format('U');
+        $results[] = (new DateTime('1997-10-12 09:00:00'))->format('U');
 
-        $r = new When();
-        $r->startDate(new DateTime("19970902T090000"))
-          ->freq("daily")
+        $r = new When(new DateTime("19970902T090000"));
+        $occurences = $r->frequency(When::DAILY)
           ->interval(10)
           ->count(5)
-          ->generateOccurences();
-
-        $occurences = $r->occurences;
+          ->generate('U');
 
         foreach ($results as $key => $result)
         {
@@ -276,108 +274,105 @@ class WhenDailyTest extends PHPUnit_Framework_TestCase
      */
     function testDailyFive()
     {
-        $results[] = new DateTime('1998-01-01 09:00:00');
-        $results[] = new DateTime('1998-01-02 09:00:00');
-        $results[] = new DateTime('1998-01-03 09:00:00');
-        $results[] = new DateTime('1998-01-04 09:00:00');
-        $results[] = new DateTime('1998-01-05 09:00:00');
-        $results[] = new DateTime('1998-01-06 09:00:00');
-        $results[] = new DateTime('1998-01-07 09:00:00');
-        $results[] = new DateTime('1998-01-08 09:00:00');
-        $results[] = new DateTime('1998-01-09 09:00:00');
-        $results[] = new DateTime('1998-01-10 09:00:00');
-        $results[] = new DateTime('1998-01-11 09:00:00');
-        $results[] = new DateTime('1998-01-12 09:00:00');
-        $results[] = new DateTime('1998-01-13 09:00:00');
-        $results[] = new DateTime('1998-01-14 09:00:00');
-        $results[] = new DateTime('1998-01-15 09:00:00');
-        $results[] = new DateTime('1998-01-16 09:00:00');
-        $results[] = new DateTime('1998-01-17 09:00:00');
-        $results[] = new DateTime('1998-01-18 09:00:00');
-        $results[] = new DateTime('1998-01-19 09:00:00');
-        $results[] = new DateTime('1998-01-20 09:00:00');
-        $results[] = new DateTime('1998-01-21 09:00:00');
-        $results[] = new DateTime('1998-01-22 09:00:00');
-        $results[] = new DateTime('1998-01-23 09:00:00');
-        $results[] = new DateTime('1998-01-24 09:00:00');
-        $results[] = new DateTime('1998-01-25 09:00:00');
-        $results[] = new DateTime('1998-01-26 09:00:00');
-        $results[] = new DateTime('1998-01-27 09:00:00');
-        $results[] = new DateTime('1998-01-28 09:00:00');
-        $results[] = new DateTime('1998-01-29 09:00:00');
-        $results[] = new DateTime('1998-01-30 09:00:00');
-        $results[] = new DateTime('1998-01-31 09:00:00');
-        $results[] = new DateTime('1999-01-01 09:00:00');
-        $results[] = new DateTime('1999-01-02 09:00:00');
-        $results[] = new DateTime('1999-01-03 09:00:00');
-        $results[] = new DateTime('1999-01-04 09:00:00');
-        $results[] = new DateTime('1999-01-05 09:00:00');
-        $results[] = new DateTime('1999-01-06 09:00:00');
-        $results[] = new DateTime('1999-01-07 09:00:00');
-        $results[] = new DateTime('1999-01-08 09:00:00');
-        $results[] = new DateTime('1999-01-09 09:00:00');
-        $results[] = new DateTime('1999-01-10 09:00:00');
-        $results[] = new DateTime('1999-01-11 09:00:00');
-        $results[] = new DateTime('1999-01-12 09:00:00');
-        $results[] = new DateTime('1999-01-13 09:00:00');
-        $results[] = new DateTime('1999-01-14 09:00:00');
-        $results[] = new DateTime('1999-01-15 09:00:00');
-        $results[] = new DateTime('1999-01-16 09:00:00');
-        $results[] = new DateTime('1999-01-17 09:00:00');
-        $results[] = new DateTime('1999-01-18 09:00:00');
-        $results[] = new DateTime('1999-01-19 09:00:00');
-        $results[] = new DateTime('1999-01-20 09:00:00');
-        $results[] = new DateTime('1999-01-21 09:00:00');
-        $results[] = new DateTime('1999-01-22 09:00:00');
-        $results[] = new DateTime('1999-01-23 09:00:00');
-        $results[] = new DateTime('1999-01-24 09:00:00');
-        $results[] = new DateTime('1999-01-25 09:00:00');
-        $results[] = new DateTime('1999-01-26 09:00:00');
-        $results[] = new DateTime('1999-01-27 09:00:00');
-        $results[] = new DateTime('1999-01-28 09:00:00');
-        $results[] = new DateTime('1999-01-29 09:00:00');
-        $results[] = new DateTime('1999-01-30 09:00:00');
-        $results[] = new DateTime('1999-01-31 09:00:00');
-        $results[] = new DateTime('2000-01-01 09:00:00');
-        $results[] = new DateTime('2000-01-02 09:00:00');
-        $results[] = new DateTime('2000-01-03 09:00:00');
-        $results[] = new DateTime('2000-01-04 09:00:00');
-        $results[] = new DateTime('2000-01-05 09:00:00');
-        $results[] = new DateTime('2000-01-06 09:00:00');
-        $results[] = new DateTime('2000-01-07 09:00:00');
-        $results[] = new DateTime('2000-01-08 09:00:00');
-        $results[] = new DateTime('2000-01-09 09:00:00');
-        $results[] = new DateTime('2000-01-10 09:00:00');
-        $results[] = new DateTime('2000-01-11 09:00:00');
-        $results[] = new DateTime('2000-01-12 09:00:00');
-        $results[] = new DateTime('2000-01-13 09:00:00');
-        $results[] = new DateTime('2000-01-14 09:00:00');
-        $results[] = new DateTime('2000-01-15 09:00:00');
-        $results[] = new DateTime('2000-01-16 09:00:00');
-        $results[] = new DateTime('2000-01-17 09:00:00');
-        $results[] = new DateTime('2000-01-18 09:00:00');
-        $results[] = new DateTime('2000-01-19 09:00:00');
-        $results[] = new DateTime('2000-01-20 09:00:00');
-        $results[] = new DateTime('2000-01-21 09:00:00');
-        $results[] = new DateTime('2000-01-22 09:00:00');
-        $results[] = new DateTime('2000-01-23 09:00:00');
-        $results[] = new DateTime('2000-01-24 09:00:00');
-        $results[] = new DateTime('2000-01-25 09:00:00');
-        $results[] = new DateTime('2000-01-26 09:00:00');
-        $results[] = new DateTime('2000-01-27 09:00:00');
-        $results[] = new DateTime('2000-01-28 09:00:00');
-        $results[] = new DateTime('2000-01-29 09:00:00');
-        $results[] = new DateTime('2000-01-30 09:00:00');
-        $results[] = new DateTime('2000-01-31 09:00:00');
+        $results[] = (new DateTime('1998-01-01 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-02 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-03 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-04 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-05 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-06 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-07 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-08 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-09 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-10 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-11 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-12 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-13 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-14 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-15 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-16 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-17 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-18 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-19 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-20 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-21 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-22 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-23 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-24 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-25 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-26 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-27 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-28 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-29 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-30 09:00:00'))->format('U');
+        $results[] = (new DateTime('1998-01-31 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-01 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-02 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-03 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-04 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-05 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-06 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-07 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-08 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-09 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-10 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-11 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-12 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-13 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-14 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-15 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-16 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-17 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-18 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-19 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-20 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-21 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-22 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-23 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-24 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-25 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-26 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-27 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-28 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-29 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-30 09:00:00'))->format('U');
+        $results[] = (new DateTime('1999-01-31 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-01 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-02 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-03 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-04 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-05 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-06 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-07 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-08 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-09 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-10 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-11 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-12 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-13 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-14 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-15 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-16 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-17 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-18 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-19 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-20 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-21 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-22 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-23 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-24 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-25 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-26 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-27 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-28 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-29 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-30 09:00:00'))->format('U');
+        $results[] = (new DateTime('2000-01-31 09:00:00'))->format('U');
 
-        $r = new When();
-        $r->startDate(new DateTime("19980101T090000"))
-          ->freq("daily")
-          ->bymonth(array(1))
+        $r = new When(new DateTime("19980101T090000"));
+        $occurences = $r->frequency(When::DAILY)
+          ->month(1)
           ->until(new DateTime("20000131T140000"))
-          ->generateOccurences();
-
-        $occurences = $r->occurences;
+          ->generate('U');
 
         foreach ($results as $key => $result)
         {
