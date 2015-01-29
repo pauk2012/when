@@ -826,6 +826,7 @@
             }
             if($this->offset != 0) {
                 $rule[] = 'OFFSET=' . $this->offset;
+
             }
             if(isset($this->seconds)) {
                 $rule[] = 'BYSECOND=' . implode(',', $this->seconds);
@@ -936,6 +937,11 @@
                             $value = preg_split('/\\s*,\\s*/', $value, -1, PREG_SPLIT_NO_EMPTY);
                             call_user_func_array(array($this, 'position'), $value);
                             break;
+                        case 'WKST':
+                            $value = preg_split('/\\s*,\\s*/', $value, -1, PREG_SPLIT_NO_EMPTY);
+                            call_user_func_array(array($this, 'weekStart'), $value);
+                            break;
+
                         default:
                             throw new Exceptions\InvalidRule;
                             break;
